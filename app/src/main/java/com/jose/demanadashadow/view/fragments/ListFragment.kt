@@ -5,18 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jose.demanadashadow.R
 import com.jose.demanadashadow.model.DemandaShadowModel
 import com.jose.demanadashadow.view.adapter.AdapterDemandaShadow
+import com.jose.demanadashadow.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_list.view.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ListFragment(private val listData: List<DemandaShadowModel>) : Fragment() {
+class ListFragment : Fragment() {
+
+    private val mainViewModel: MainViewModel by viewModel()
 
 
     companion object {
-        fun newInstance(list: List<DemandaShadowModel>) = ListFragment(list)
+        fun newInstance() = ListFragment()
     }
 
 
@@ -31,13 +36,28 @@ class ListFragment(private val listData: List<DemandaShadowModel>) : Fragment() 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity = activity as Context
-        setAdapter(view, activity)
+       initViewModel(view,activity)
     }
 
-    private fun setAdapter(view: View, activity: Context) {
+    private fun initViewModel(view: View, activity: Context){
+        mainViewModel.init()
+        mainViewModel.dataList.observe(viewLifecycleOwner, {list ->
+            if (list != null){
+                setAdapter(view, activity,list)
+            }else{
+                Toast.makeText(
+                    activity,
+                    "Ops tivemos um problema, tente novamente mais tarde!",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        })
+    }
+
+    private fun setAdapter(view: View, activity: Context, list:List<DemandaShadowModel>) {
         val recyclerView = view.fragmentList
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = AdapterDemandaShadow(listData)
+        recyclerView.adapter = AdapterDemandaShadow(list)
     }
 
 }

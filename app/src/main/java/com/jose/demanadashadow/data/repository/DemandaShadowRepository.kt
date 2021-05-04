@@ -6,8 +6,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DemandaShadowRepository(private val demandaShadowApiTask: DemandaShadowApiTask) {
+class DemandaShadowRepository() {
 
+    private val demandaShadowApiTask = DemandaShadowApiTask()
     companion object {
         private const val SUCCESS_CODE = 200
     }
