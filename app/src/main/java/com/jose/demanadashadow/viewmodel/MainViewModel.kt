@@ -23,7 +23,7 @@ class MainViewModel : ViewModel() {
         getDataFromApi()
     }
 
-    private fun getDataFromApi() {
+    fun getDataFromApi() {
         CoroutineScope(Dispatchers.Main).launch {
             withContext(Dispatchers.Default) {
                 demandaShadowRepository.requestDemandaShadowApi(
@@ -34,11 +34,11 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    private fun onRequestError(code: Int?, message: String?) {
+    fun onRequestError() {
         _dataList.postValue(null)
     }
 
-    private fun onRequestSuccess(list: List<DemandaShadowModel>) {
+    fun onRequestSuccess(list: List<DemandaShadowModel>) {
         _dataList.postValue(list)
     }
 }

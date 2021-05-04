@@ -8,31 +8,23 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.jose.demanadashadow.R
-import com.jose.demanadashadow.data.api.DemandaShadowApiTask
-import com.jose.demanadashadow.data.repository.DemandaShadowRepository
 import com.jose.demanadashadow.model.DemandaShadowModel
 import com.jose.demanadashadow.view.fragments.ListFragment
 import com.jose.demanadashadow.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(){
     private lateinit var mainViewModel:MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (supportActionBar != null){
-            supportActionBar!!.hide()
-        }
-
-        btn_logout.setOnClickListener(this)
-
         initViewModel()
+
+        btn_logout.setOnClickListener {
+            logout()
+        }
     }
 
     private fun initViewModel(){
@@ -59,14 +51,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    override fun onClick(v: View) {
-        val id = v.id
-
-        if (id == R.id.btn_logout){
-            FirebaseAuth.getInstance().signOut()
-            changeActivityLogin()
-        }
+    private fun logout(){
+        FirebaseAuth.getInstance().signOut()
+        changeActivityLogin()
     }
+
 
     private fun changeActivityLogin() {
         val intentLogin = Intent(this, LoginActivity::class.java)

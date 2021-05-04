@@ -10,4 +10,7 @@
     <color name="lightGrey">#CDCBCB</color>
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#FFA000</color>
+    <color name="orangelight">#F8CB7E</color>
+    <color name="blue">#0E6ECD</color>
+    <color name="red">#ED0909</color>
 </resources>

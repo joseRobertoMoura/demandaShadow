@@ -3,41 +3,31 @@ package com.jose.demanadashadow.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.jose.demanadashadow.R
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity(), View.OnClickListener {
+class LoginActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         verificaUsuarioLogado()
 
-        if (supportActionBar != null){
-            supportActionBar!!.hide()
-        }
-
-        btn_entrar.setOnClickListener(this)
-        txt_tela_cadastro.setOnClickListener(this)
+        btn_entrar.setOnClickListener { login()}
+        txt_tela_cadastro.setOnClickListener { changeActiviryCadastro() }
     }
 
-    override fun onClick(v: View) {
-        val id = v.id
-        if (id == R.id.btn_entrar){
-            val email = edt_email.text.toString()
-            val senha = edt_senha.text.toString()
+    private fun login(){
+        val email = edt_email.text.toString()
+        val senha = edt_senha.text.toString()
 
-            if (email.isEmpty() || senha.isEmpty()){
-                txt_alerta.setText("Os campos devem ser preenchidos!")
-            }else{
-                logar(email, senha)
-            }
-        }else if(id == R.id.txt_tela_cadastro){
-            changeActiviryCadastro()
+        if (email.isEmpty() || senha.isEmpty()){
+            txt_alerta.setText(R.string.msg_campos_vazios)
+        }else{
+            logar(email, senha)
         }
     }
 
@@ -51,12 +41,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     changeActiviryMain()
                 }
             }.addOnFailureListener {
-                when {
-                    it is FirebaseAuthWeakPasswordException -> {
-                        txt_alerta.setText("Password incorreto!")
+                when (it) {
+                    is FirebaseAuthWeakPasswordException -> {
+                        txt_alerta.text = getString(R.string.msg_senha_incorreta)
                     }
                     else -> {
-                        txt_alerta.setText("Erro ao logar usuário!")
+                        txt_alerta.text = getString(R.string.msg_erro_login)
                     }
                 }
             }

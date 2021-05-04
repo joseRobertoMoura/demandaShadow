@@ -2,8 +2,6 @@ package com.jose.demanadashadow.data.repository
 
 import com.jose.demanadashadow.data.api.DemandaShadowApiTask
 import com.jose.demanadashadow.model.DemandaShadowModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,11 +12,10 @@ class DemandaShadowRepository(private val demandaShadowApiTask: DemandaShadowApi
         private const val SUCCESS_CODE = 200
     }
 
-    suspend fun requestDemandaShadowApi(
+    fun requestDemandaShadowApi(
         onSuccess: (List<DemandaShadowModel>) -> Unit,
-        onError: (Int?, String?) -> Unit
+        onError: () -> Unit
     ) {
-        withContext(Dispatchers.Default) {
             val request = demandaShadowApiTask.demandaShadowApi().getDataDemandaShadowApi()
 
             request.enqueue(object : Callback<List<DemandaShadowModel>> {
@@ -33,15 +30,14 @@ class DemandaShadowRepository(private val demandaShadowApiTask: DemandaShadowApi
                         val listResponse: List<DemandaShadowModel> = response.body()!!
                         onSuccess.invoke(listResponse)
                     } else {
-                        onError(responseCode, null)
+                        onError()
                     }
                 }
 
                 override fun onFailure(call: Call<List<DemandaShadowModel>>, t: Throwable) {
-                    onError(null, t.toString())
+                    onError()
                 }
             })
-        }
     }
 
 }

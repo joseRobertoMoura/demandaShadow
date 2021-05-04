@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:layout_margin="5dp"
-    android:background="@color/black"
+    android:background="@color/orange"
     android:padding="18dp"
     app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey">
+        android:background="@color/orangelight">
 
         <ImageView
             android:id="@+id/image"
@@ -21,14 +20,14 @@
             android:src="@drawable/ic_baseline_image_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/cd_imagem_cliente" />
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:padding="8dp"
-            android:text="Nome"
             android:textColor="@color/white"
             android:textSize="22sp"
             app:layout_constraintLeft_toRightOf="@+id/image"
@@ -40,7 +39,6 @@
             android:layout_height="0dp"
             android:padding="8dp"
             android:layout_marginBottom="8dp"
-            android:text="E-mail"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintLeft_toRightOf="@+id/image"

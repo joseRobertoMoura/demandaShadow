@@ -3,7 +3,6 @@ package com.jose.demanadashadow.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
@@ -12,32 +11,23 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.jose.demanadashadow.R
 import kotlinx.android.synthetic.main.activity_cadastro.*
 
-class CadastroActivity : AppCompatActivity(), View.OnClickListener{
+class CadastroActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro)
 
-        if (supportActionBar != null){
-            supportActionBar!!.hide()
-        }
-
-        btn_cadastrar.setOnClickListener(this)
-        txt_voltar.setOnClickListener(this)
+        btn_cadastrar.setOnClickListener { cadastrar() }
+        txt_voltar.setOnClickListener { changeActivity() }
     }
 
-    override fun onClick(v: View) {
-        val id = v.id
-        if (id == R.id.btn_cadastrar){
-            val email = edt_email_cadastrar.text.toString()
-            val senha = edt_senha_cadastrar.text.toString()
+    private fun cadastrar(){
+        val email = edt_email_cadastrar.text.toString()
+        val senha = edt_senha_cadastrar.text.toString()
 
-            if (email.isEmpty() || senha.isEmpty()){
-                txt_alerta_cadastrar.setText("Os campos devem ser preenchidos")
-            }else{
-                cadastrar(email,senha)
-            }
-        }else if (id == R.id.txt_voltar){
-            changeActivity()
+        if (email.isEmpty() || senha.isEmpty()){
+            txt_alerta_cadastrar.text = getString(R.string.msg_campos_vazios)
+        }else{
+            cadastrar(email,senha)
         }
     }
 
@@ -52,19 +42,18 @@ class CadastroActivity : AppCompatActivity(), View.OnClickListener{
                 }
             }.addOnFailureListener {
 
-                val error = it
-                when {
-                    error is FirebaseAuthWeakPasswordException -> {
-                        txt_alerta_cadastrar.setText("A senha deve ter no mínimo 6 caracteres")
+                when (it) {
+                    is FirebaseAuthWeakPasswordException -> {
+                        txt_alerta_cadastrar.text = getString(R.string.msg_tamanho_senha)
                     }
-                    error is FirebaseAuthUserCollisionException -> {
-                        txt_alerta_cadastrar.setText("E-mail já cadastrado")
+                    is FirebaseAuthUserCollisionException -> {
+                        txt_alerta_cadastrar.text = getString(R.string.msg_email_existente)
                     }
-                    error is FirebaseNetworkException -> {
-                        txt_alerta_cadastrar.setText("Sem conexão com a internet")
+                    is FirebaseNetworkException -> {
+                        txt_alerta_cadastrar.text = getString(R.string.msg_sem_conexao)
                     }
                     else -> {
-                        txt_alerta_cadastrar.setText("Erro ao cadastrar usuário")
+                        txt_alerta_cadastrar.text = getString(R.string.msg_erro_cadastro_usuario)
                     }
                 }
             }

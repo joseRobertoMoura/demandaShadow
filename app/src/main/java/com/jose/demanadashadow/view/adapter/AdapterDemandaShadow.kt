@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jose.demanadashadow.R
 import com.jose.demanadashadow.model.DemandaShadowModel
-import kotlinx.android.synthetic.main.fragment_item_list.view.*
 
 class AdapterDemandaShadow(
     private var list: List<DemandaShadowModel>
@@ -31,12 +30,12 @@ class FragmentViewHolder(
     itemView: View,
 ) : RecyclerView.ViewHolder(itemView){
 
-    val tvName: TextView =itemView.findViewById(R.id.tvName)
-    val tvEmail: TextView = itemView.findViewById(R.id.tvEmail)
+    private val tvName: TextView =itemView.findViewById(R.id.tvName)
+    private val tvEmail: TextView = itemView.findViewById(R.id.tvEmail)
 
     fun bind(data:DemandaShadowModel){
-        tvName.text = "Nome: " + data.name
-        tvEmail.text = "E-mail: " + data.email
+        tvName.text = "Nome: ${data.name}"
+        tvEmail.text = "E-mail: ${data.email}"
     }
 
 }

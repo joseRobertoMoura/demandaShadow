@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">demanadaShadow</string>
+    <string name="msg_campos_vazios">Os campos devem ser preenchidos</string>
+    <string name="msg_tamanho_senha">A senha deve ter no mínimo 6 caracteres</string>
+    <string name="msg_email_existente">E-mail já cadastrado</string>
+    <string name="msg_sem_conexao">Sem conexão com a internet</string>
+    <string name="msg_erro_cadastro_usuario">Erro ao cadastrar usuário</string>
+    <string name="msg_senha_incorreta">Password incorreto!</string>
+    <string name="msg_erro_login">Erro ao logar usuário!</string>
+    <string name="txt_cadastro">Cadastro</string>
+    <string name="txt_email">E-mail</string>
+    <string name="txt_senha">Senha</string>
+    <string name="txt_btn_cadastrar">Cadastrar</string>
+    <string name="txt_btn_voltar">Voltar</string>
+    <string name="txt_btn_entrar">Entrar</string>
+    <string name="txt_btn_sair">Sair</string>
+    <string name="cd_imagem_cliente">Imagem Cliente</string>
+    <string name="txt_title_login">Login</string>
+    <string name="txt_btn_novo_por_aqui">Novo por aqui? Inscreva-se agora.</string>
+    <string name="hint_senha">Senha</string>
+    <string name="hint_email">E-mail</string>
 </resources>

@@ -1,62 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.LoginActivity"
     android:orientation="vertical"
-    android:background="@color/black">
+    android:background="@color/orange">
 
     <TextView
+        android:id="@+id/title_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/txt_title_login"
         android:textColor="@color/white"
         android:textSize="40sp"
-        android:layout_marginTop="100dp"
-        android:layout_marginStart="140dp"/>
+        android:layout_marginTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/edt_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:padding="20dp"
-        android:hint="E-mail"
+        android:hint="@string/hint_email"
         android:inputType="textWebEmailAddress"
         android:textColorHint="@color/white"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:background="@color/grey"/>
+        android:background="@color/orangelight"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_login"
+        android:autofillHints="seuemail@email.com" />
 
     <EditText
         android:id="@+id/edt_senha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:hint="Senha"
+        android:hint="@string/hint_senha"
         android:inputType="textPassword"
         android:textColorHint="@color/white"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:background="@color/grey"/>
+        android:background="@color/orangelight"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email"
+        android:autofillHints="Password" />
+
     <TextView
         android:id="@+id/txt_alerta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/orange"
+        android:textColor="@color/red"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginStart="20dp"/>
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_senha"/>
 
     <Button
         android:id="@+id/btn_entrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Entrar"
+        android:text="@string/txt_btn_entrar"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -66,8 +82,11 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="18dp"
-        android:backgroundTint="@color/black"
-        app:cornerRadius="10dp"/>
+        android:backgroundTint="@color/blue"
+        app:cornerRadius="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_alerta"/>
 
     <TextView
         android:id="@+id/txt_tela_cadastro"
@@ -75,11 +94,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:text="Novo por aqui? Inscreva-se agora."
+        android:text="@string/txt_btn_novo_por_aqui"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_entrar"/>
 
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
